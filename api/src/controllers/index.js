@@ -53,14 +53,15 @@ function getDetail(pok){
             attack: pok.attack,
             defense: pok.defense,
             speed: pok.speed,
-            types: pok.types
+            types: pok.types,
+            create: pok.create
         }
     }  
 }
 
 async function getDbData(){
     return await Pokemon.findAll({
-        attributes: ['id', 'name', 'height', 'weight', 'hp', 'attack', 'defense', 'speed', 'image'],
+        attributes: ['id', 'name', 'height', 'weight', 'hp', 'attack', 'defense', 'speed', 'image', 'create'],
         include: {
             model: Type,
             attributes: ['name'],
