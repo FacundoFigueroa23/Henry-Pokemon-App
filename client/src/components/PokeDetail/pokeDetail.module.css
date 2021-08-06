@@ -1,0 +1,12 @@
+.detail{
+    display: flex;
+    flex-direction: row;
+}
+
+.name{
+    width: 50%;
+}
+
+.data{
+    width: 50%;
+}
