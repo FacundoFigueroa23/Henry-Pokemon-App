@@ -50,7 +50,9 @@ function Home() {
             <div className={styles.pokemonsBox}>
                 {
                     current_pokemons ? current_pokemons.map( poke => (
-                        <Pokemon name={poke.name} image={poke.image} types={poke.types} key={poke.id} />
+                        <Link to={`/home/${poke.id}`}>
+                            <Pokemon name={poke.name} image={poke.image} types={poke.types} key={poke.id} />
+                        </Link>
                     ))
                     : <div>Cargando...</div>
                 }

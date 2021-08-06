@@ -1,9 +1,11 @@
-import {GET_POKEMONS, GET_POKEMON_BY_NAME, GET_TYPES, FILTER_BY_TYPE, FILTER_BY_ORIGIN, ORDER_BY_NAME, ORDER_BY_ATTACK} from '../actions/names';
+import {GET_POKEMONS, GET_POKEMON_BY_NAME, GET_TYPES, FILTER_BY_TYPE, FILTER_BY_ORIGIN, ORDER_BY_NAME, ORDER_BY_ATTACK,
+GET_DETAIL, RESET_DETAIL} from '../actions/names';
 
 const initialState = {
     pokemons: [],
     allPokemons: [],
-    types: []
+    types: [],
+    detail: []
 };
 
 function reducer(state = initialState, action){
@@ -20,7 +22,7 @@ function reducer(state = initialState, action){
         case GET_POKEMON_BY_NAME:
             return {
                 ...state,
-                pokemons: [action.payload]
+                pokemons: action.payload
             }
 
         case GET_TYPES:
@@ -86,6 +88,18 @@ function reducer(state = initialState, action){
             return {
                 ...state,
                 pokemons: pokemons_ordered_by_attack
+            }
+
+        case GET_DETAIL:
+            return {
+                ...state,
+                detail: action.payload
+            }
+
+        case RESET_DETAIL:
+            return {
+                ...state,
+                detail: []
             }
 
         default:

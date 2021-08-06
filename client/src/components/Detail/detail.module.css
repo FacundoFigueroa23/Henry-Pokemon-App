@@ -1,0 +1,18 @@
+.detailBox{
+    height: 100%;
+    display: flex;
+    /* align-items: center; */
+    flex-direction: column;
+
+    background: url("https://images8.alphacoders.com/961/961640.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    overflow: hidden;
+}
+
+.btn{
+    padding: 10px;
+    display: flex;
+    align-items: flex-start;
+}
