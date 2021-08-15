@@ -1,4 +1,25 @@
-.filterBox{
+.filter_box{
+    height: 100%;
+    width: 400px;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+}
+
+.label{
+    font-family: 'Rubik', sans-serif;
+}
+
+.type_select{
+    height: 100%;
+    border-radius: 10px;
+    outline: none;
+    font-family: 'Rubik', sans-serif;
+}
+
+.origin_select{
+    height: 100%;
+    border-radius: 10px;
+    outline: none;
+    font-family: 'Rubik', sans-serif;
 }

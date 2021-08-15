@@ -1,4 +1,4 @@
-.paginationBox{
+.pagination_box{
     width: 15%;
     height: 30px;
     padding: 10px;
@@ -7,7 +7,17 @@
 }
 
 .btn{
-    width: 30px;
+    width: 35px;
+    height: 35px;
     border: none;
-    border-radius: 15px;
+    border-radius: 20px;
+    font-size: 15px;
+    background-color: #5089C6;
+    font-family: 'Rubik', sans-serif;
+}
+
+.btn:hover{
+    cursor: pointer;
+    background-color: #5089c68a;
+    transition: 0.4s;
 }

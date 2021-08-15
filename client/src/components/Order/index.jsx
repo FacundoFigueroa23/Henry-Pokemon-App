@@ -1,39 +1,39 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useDispatch} from 'react-redux';
-import {orderPokemonsByName, orderPokemonsByAttack} from '../../actions';
+import {order_pokemons_by_name, order_pokemons_by_attack} from '../../actions';
 
 import styles from './order.module.css';
 
 function Order({render}) {
     const dispatch = useDispatch();
 
-    function handleOrderName(e){
+    function handle_order_name(e){
         e.preventDefault();
-        dispatch(orderPokemonsByName(e.target.value));
+        dispatch(order_pokemons_by_name(e.target.value));
         render(`Ordered by name ${e.target.value}`);
     }
 
-    function handleOrderAttack(e){
+    function handle_order_attack(e){
         e.preventDefault();
-        dispatch(orderPokemonsByAttack(e.target.value));
+        dispatch(order_pokemons_by_attack(e.target.value));
         render(`Ordered by attack ${e.target.value}`);
     }
     return (
-        <div className={styles.orderBox}>
+        <div className={styles.order_box}>
             <div>
-                <label>Order by name</label>
-                <select onChange={(e) => handleOrderName(e)} >
+                <label className={styles.label} >Order By Name </label>
+                <select className={styles.name_select} onChange={handle_order_name} >
                     <option value="" ></option>
-                    <option value="ASC" >ASC</option>
-                    <option value="DESC" >DESC</option>
+                    <option value="ASC" >A-Z</option>
+                    <option value="DESC" >Z-A</option>
                 </select>
             </div>
             <div>
-                <label>Order by attack</label>
-                <select onChange={(e) => handleOrderAttack(e)}>
+                <label className={styles.label} >Order By Attack </label>
+                <select className={styles.attack_select} onChange={handle_order_attack}>
                     <option value="" ></option>
-                    <option value="ASC" >ASC</option>
-                    <option value="DESC" >DESC</option>
+                    <option value="ASC" >Asc</option>
+                    <option value="DESC" >Desc</option>
                 </select>
             </div>
         </div>

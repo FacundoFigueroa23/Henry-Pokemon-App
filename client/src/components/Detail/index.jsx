@@ -1,37 +1,38 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {Link} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 
-import {getDetail, resetDetail} from '../../actions';
+import {upper_case} from '../../controllers';
+import {get_detail, reset_detail} from '../../actions';
 import PokeDetail from '../PokeDetail';
 
 import styles from './detail.module.css';
 
 function Detail(props) {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     useEffect(() => {
-        dispatch(getDetail(props.match.params.id))
+        dispatch(get_detail(props.match.params.id))
     }, [dispatch])
 
     const details = useSelector((state) => state.detail);
 
-    function handleButtonHome(e){
+    function handle_button_home(e){
         e.preventDefault();
-        dispatch(resetDetail())
+        dispatch(reset_detail());
+        history.push('/home');
     }
     return (
-        <div className={styles.detailBox}>
-            <Link to="/home" className={styles.btn}>
-                <button onClick={(e) => handleButtonHome(e)} >Home</button>
-            </Link>
-            <div className={styles.pokemonDetails}>
-                <div className={styles.pokemonImg}>
+        <div className={styles.detail_box}>
+            <button className={styles.btn} onClick={handle_button_home} >Home</button>
+            <div className={styles.pokemon_details}>
+                <div className={styles.pokemon_img}>
                     <img src={details.image} alt={`${details.name} image`} className={styles.imagen} />
                 </div>
                 <div className={styles.details}>
-                    <PokeDetail name="Name" data={details.name} />
-                    <PokeDetail name="Types" data={details.types} />
+                    <PokeDetail name="Name" data={upper_case(details.name)} />
+                    <PokeDetail name="Types" data={details.types.map( type => upper_case(type))} />
                     <PokeDetail name="Height" data={details.height} />
                     <PokeDetail name="Weight" data={details.weight} />
                     <PokeDetail name="Hp" data={details.hp} />

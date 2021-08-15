@@ -5,7 +5,7 @@ function PokeDetail({name, data}) {
     return (
         <div className={styles.detail}>
             <label className={styles.name}>{`${name}: `}</label>
-            <h3 className={styles.data}>{data}</h3>
+            <label className={styles.data}>{data}</label>
         </div>
     )
 }

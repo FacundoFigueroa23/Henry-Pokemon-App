@@ -1,19 +1,18 @@
 const { Router } = require('express');
 const axios = require('axios').default;
-const {getDetail, getDbData} = require('../controllers');
+const {get_detail, get_db_data} = require('../controllers');
 const {POKEMON_ID} = require('../utils/constants');
-const {Pokemon} = require('../db');
 
 const router = Router();
 
 router.get('/pokemons/:id', async (req, res, next) => {
     try{
         const {id} = req.params;
-        let existeDb = await getDbData();
-        existeDb = existeDb.find( pok => pok.id === id);
-        if(existeDb) return res.status(200).send(getDetail(existeDb));
-        const existeApi = await axios.get(`${POKEMON_ID}${id}`);
-        if(existeApi.data) return res.status(200).send(getDetail(existeApi.data));
+        let existe_db = await get_db_data();
+        existe_db = existe_db.find( pok => pok.id === id);
+        if(existe_db) return res.status(200).send(get_detail(existe_db));
+        const existe_api = await axios.get(`${POKEMON_ID}${id}`);
+        if(existe_api.data) return res.status(200).send(get_detail(existe_api.data));
         return res.status(404).send("El pokemon buscado no existe");
     }catch(error){
         next(error);

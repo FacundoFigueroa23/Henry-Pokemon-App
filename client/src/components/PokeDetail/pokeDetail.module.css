@@ -1,12 +1,16 @@
 .detail{
     display: flex;
     flex-direction: row;
+    padding: 10px;
 }
 
 .name{
-    width: 50%;
+    width: 30%;
+    font-family: 'Rubik', sans-serif;
+    font-size: 19px;
 }
 
 .data{
-    width: 50%;
+    font-family: 'Rubik', sans-serif;
+    font-size: 22px;
 }

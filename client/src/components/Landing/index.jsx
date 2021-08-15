@@ -4,12 +4,12 @@ import styles from './landing.module.css';
 
 function Landing() {
     return (
-        <div className={styles.landingBox}>
-            <div className={styles.landingTitle}>
+        <div className={styles.landing_box}>
+            <div className={styles.landing_title}>
                 <label>Welcome to Henry Pokemon!</label>
             </div>
             <Link to="/home" >
-                <button className={styles.landingBtn}>Enter</button>
+                <button className={styles.landing_btn}>Enter</button>
             </Link>
         </div>
     )

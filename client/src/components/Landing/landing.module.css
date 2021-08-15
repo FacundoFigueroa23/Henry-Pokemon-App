@@ -1,4 +1,4 @@
-.landingBox{
+.landing_box{
     height: 100%;
     background: url("https://images.alphacoders.com/963/963324.png");
     background-size: cover;
@@ -12,7 +12,7 @@
     justify-content: center;
 }
 
-.landingTitle{
+.landing_title{
     color: #FDFAF6;
     font-family: 'Kanit', sans-serif;
     font-size: 45px;
@@ -20,7 +20,7 @@
     margin-left: 60px;
 }
 
-.landingBtn{
+.landing_btn{
     margin-left: 325px;
     margin-top: 10px;
     width: 54px;
@@ -34,7 +34,7 @@
     font-size: 16px;
 }
 
-.landingBtn:hover{
+.landing_btn:hover{
     cursor: pointer;
     background-color: red;
     color: white;

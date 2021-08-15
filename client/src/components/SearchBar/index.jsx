@@ -2,27 +2,31 @@ import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import styles from './searchBar.module.css';
 
-import {getPokemonByName} from '../../actions';
+import {get_pokemon_by_name} from '../../actions';
 
 function SearchBar() {
     const dispatch = useDispatch();
-    const [input, setInput] = useState("");
+    const [input, set_input] = useState("");
 
-    function handleInput(e){
+    function handle_input(e){
         e.preventDefault();
-        setInput(e.target.value);
+        set_input(e.target.value);
     }
 
-    function handleClick(e){
+    function handle_click(e){
         e.preventDefault();
-        dispatch(getPokemonByName(input))
-        setInput("");
+        if(input === ""){
+            alert("Name is required‼");
+        }else{
+            dispatch(get_pokemon_by_name(input))
+            set_input("");
+        }
     }
 
     return (
-        <div className={styles.searchBarBox}>
-            <input type="text" placeholder="Search pokemon..." onChange={(e) => handleInput(e)} />
-            <button onClick={(e) => handleClick(e)} >Search</button>
+        <div className={styles.search_bar_box}>
+            <input className={styles.input} type="text" placeholder=" Search pokemon..." onChange={handle_input} />
+            <button className={styles.btn} onClick={handle_click} >Search</button>
         </div>
     )
 }

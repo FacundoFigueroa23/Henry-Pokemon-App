@@ -1,20 +1,23 @@
 import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import styles from './home.module.css';
 
-import {getPokemons} from '../../actions';
+import {get_pokemons} from '../../actions';
 import Pagination from '../Pagination';
 import Pokemon from '../Pokemon';
 import SearchBar from '../SearchBar';
 import Filter from '../Filter';
 import Order from '../Order';
 
+import Song from './Pokémon Song.mp3';
+
 function Home() {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     useEffect( () => {
-        dispatch(getPokemons());
+        dispatch(get_pokemons());
     }, []);
 
     const pokemons = useSelector( state => state.pokemons);
@@ -27,40 +30,50 @@ function Home() {
         set_current_page(page_number);
     }
 
-    function handleClick(e){
+    function handle_click(e){
         e.preventDefault();
-        dispatch(getPokemons());
+        dispatch(get_pokemons());
     }
 
-    const [orden, setOrden] = useState('');
+    const [orden, set_orden] = useState('');
+
+    function create_pokemon_btn(e){
+        e.preventDefault();
+        history.push('/create');
+    }
 
     return (
-        <div className={styles.homeBox}>
-            <div className={styles.btnsBox}>
-                <button onClick={(e) => handleClick(e)} >Reload pokemons</button>
+        <div className={styles.home_box}>
+
+            <h1 className={styles.title} >HENRY POKEMON</h1>
+
+            <div className={styles.btns_box}>
+                <button className={styles.btn}  onClick={handle_click} >Reload Pokemons</button>
                 <SearchBar />
-                <Link to="/create">
-                    <button>Create pokemon</button>
-                </Link>
+                <button className={styles.btn} onClick={create_pokemon_btn} >Create Pokemon</button>
             </div>
-            <div className={styles.orderAndFilterBox}>
-                <Order render={setOrden} />
+
+            <div className={styles.order_and_filter_box}>
+                <Order render={set_orden} />
                 <Filter />
             </div>
-            <div className={styles.pokemonsBox}>
+
+            <div className={styles.pokemons_box}>
                 {
-                    current_pokemons ? current_pokemons.map( poke => (
-                        <Link to={`/home/${poke.id}`}>
-                            <Pokemon name={poke.name} image={poke.image} types={poke.types} key={poke.id} />
-                        </Link>
+                    pokemons.length !== 0 ? current_pokemons.map( poke => (
+                        <Pokemon id={poke.id} name={poke.name} image={poke.image} types={poke.types} />
                     ))
-                    : <div>Cargando...</div>
+                    : <div>Loading...</div>
                 }
             </div>
+
             {
-                pokemons.length > 1 ? <Pagination pokemons_per_page={pokemons_per_page} total_pokemons={pokemons.length} paginate={paginate} />
+                pokemons.length > pokemons_per_page ? <Pagination pokemons_per_page={pokemons_per_page} total_pokemons={pokemons.length} paginate={paginate} />
                 : <br></br>
             }
+
+            <audio src={Song} controls autoPlay loop className={styles.audio} />
+            
         </div>
     )
 }

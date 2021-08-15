@@ -7,7 +7,7 @@ function Pagination({pokemons_per_page, total_pokemons, paginate}) {
         page_numbers.push(number);
     }
     return (
-        <nav className={styles.paginationBox}>
+        <nav className={styles.pagination_box}>
             {
                 page_numbers.map( number => (
                     <button className={styles.btn} key={number} onClick={ () => paginate(number)} >{number}</button>

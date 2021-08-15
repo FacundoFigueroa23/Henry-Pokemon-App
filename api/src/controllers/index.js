@@ -1,18 +1,37 @@
 const axios = require('axios').default;
-const { POKEMONS_URL, POKEMON_NAME, POKEMON_ID, POKEMONS_TYPES } = require('../utils/constants');
+const { POKEMONS_URL } = require('../utils/constants');
 const {Pokemon, Type} = require('../db');
 
-async function getApiData(){
-    const urlPokemons = await axios.get(`${POKEMONS_URL}?limit=40`);
+async function get_api_data(){
+    const url_pokemons = await axios.get(`${POKEMONS_URL}?limit=40`);
     let pokemons = [];
-    for(let pokemon of urlPokemons.data.results){
-        const pokemonInfo = await axios.get(pokemon.url);
-        pokemons.push(pokemonInfo.data);
+    for(let pokemon of url_pokemons.data.results){
+        const pokemon_info = await axios.get(pokemon.url);
+        pokemons.push(pokemon_info.data);
     }
-    return getPrincipal(pokemons);
+    return get_principal(pokemons);
 }
 
-function getPrincipal(array){
+async function get_db_data(){
+    return await Pokemon.findAll({
+        attributes: ['id', 'name', 'height', 'weight', 'hp', 'attack', 'defense', 'speed', 'image', 'create'],
+        include: {
+            model: Type,
+            attributes: ['name'],
+            through: {
+                attributes: []
+            }
+        }
+    });
+}
+
+async function get_all_data(){
+    const api_info = await get_api_data();
+    const db_info = await get_db_data();
+    return api_info.concat(db_info);
+}
+
+function get_principal(array){
     return array.map( pok => {
         return {
             id: pok.id,
@@ -29,7 +48,7 @@ function getPrincipal(array){
     });
 }
 
-function getDetail(pok){
+function get_detail(pok){
     if(pok.hasOwnProperty("stats")){
         return {
             id: pok.id,
@@ -53,35 +72,17 @@ function getDetail(pok){
             attack: pok.attack,
             defense: pok.defense,
             speed: pok.speed,
-            types: pok.types,
-            create: pok.create
+            types: pok.types.map( obj => obj.name),
+            create: pok.create,
+            image: pok.image
         }
     }  
 }
 
-async function getDbData(){
-    return await Pokemon.findAll({
-        attributes: ['id', 'name', 'height', 'weight', 'hp', 'attack', 'defense', 'speed', 'image', 'create'],
-        include: {
-            model: Type,
-            attributes: ['name'],
-            through: {
-                attributes: []
-            }
-        }
-    });
-}
-
-async function getAllData(){
-    const apiInfo = await getApiData();
-    const dbInfo = await getDbData();
-    return apiInfo.concat(dbInfo);
-}
-
 module.exports = {
-    getApiData,
-    getDbData,
-    getAllData,
-    getPrincipal,
-    getDetail
+    get_api_data,
+    get_db_data,
+    get_all_data,
+    get_principal,
+    get_detail
 }

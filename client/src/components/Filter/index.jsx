@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {getTypes, filterPokemonsByType, filterPokemonsByOrigin} from '../../actions';
+import {get_types, filter_pokemons_by_type, filter_pokemons_by_origin} from '../../actions';
+import {upper_case} from '../../controllers';
 
 import styles from './filter.module.css';
 
@@ -8,39 +9,39 @@ function Filter() {
     const dispatch = useDispatch();
 
     useEffect( () => {
-        dispatch(getTypes())
+        dispatch(get_types())
     }, [dispatch]);
 
     const types = useSelector( state => state.types);
 
-    function handleFilterType(e){
+    function handle_filter_type(e){
         e.preventDefault();
-        dispatch(filterPokemonsByType(e.target.value));
+        dispatch(filter_pokemons_by_type(e.target.value));
     }
 
-    function handleFilterOrigin(e){
+    function handle_filter_origin(e){
         e.preventDefault();
-        dispatch(filterPokemonsByOrigin(e.target.value));
+        dispatch(filter_pokemons_by_origin(e.target.value));
     }
     return (
-        <div className={styles.filterBox}>
+        <div className={styles.filter_box}>
             <div>
-                <label>Filter by type</label>
-                <select onChange={(e) => handleFilterType(e)}>
-                    <option></option>
+                <label className={styles.label} >Filter By Type </label>
+                <select className={styles.type_select} onChange={handle_filter_type}>
+                <option value="All">All</option>
                     {
                         types.map( type => (
-                            <option value={type.name} key={type.id} >{type.name}</option>
+                            <option value={type.name} key={type.id} >{upper_case(type.name)}</option>
                         ))
                     }
                 </select>
             </div>
             <div>
-                <label>Filter by origin</label>
-                <select onChange={(e) => handleFilterOrigin(e)}>
-                    <option></option>
-                    <option value="DB" >DB</option>
-                    <option value="API" >API</option>
+                <label className={styles.label} >Filter By Origin </label>
+                <select className={styles.origin_select} onChange={handle_filter_origin}>
+                    <option value="ALL">All</option>
+                    <option value="DB" >Db</option>
+                    <option value="API" >Api</option>
                 </select>
             </div>
         </div>
