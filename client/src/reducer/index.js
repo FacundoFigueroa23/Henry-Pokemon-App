@@ -1,9 +1,10 @@
 import {GET_POKEMONS, GET_POKEMON_BY_NAME, GET_TYPES, FILTER_BY_TYPE, FILTER_BY_ORIGIN, ORDER_BY_NAME, ORDER_BY_ATTACK,
-GET_DETAIL, RESET_DETAIL, POST_POKEMON} from '../actions/names';
+GET_DETAIL, RESET_DETAIL, POST_POKEMON, RELOAD_POKEMONS} from '../actions/names';
 
 const initial_state = {
     pokemons: [],
     all_pokemons: [],
+    original_pokemons: [],
     types: [],
     detail: {}
 };
@@ -48,13 +49,18 @@ function reducer(state = initial_state, action){
             return {
                 ...state,
                 pokemons: action.payload,
-                all_pokemons: action.payload
+                all_pokemons: action.payload,
+                original_pokemons: action.payload
             }
 
         case GET_POKEMON_BY_NAME:
+            if(action.payload.length === 0) {
+                state.pokemons = ["El pokemon no se enccontró"]
+            }else{
+                state.pokemons = action.payload
+            }
             return {
-                ...state,
-                pokemons: action.payload
+                ...state
             }
 
         case GET_TYPES:
@@ -106,6 +112,13 @@ function reducer(state = initial_state, action){
         case POST_POKEMON:
             return {
                 ...state
+            }
+
+        case RELOAD_POKEMONS:
+            return {
+                ...state,
+                pokemons: state.original_pokemons,
+                all_pokemons: state.original_pokemons
             }
 
         case RESET_DETAIL:

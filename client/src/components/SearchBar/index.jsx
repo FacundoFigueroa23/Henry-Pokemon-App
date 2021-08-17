@@ -16,7 +16,7 @@ function SearchBar() {
     function handle_click(e){
         e.preventDefault();
         if(input === ""){
-            alert("Name is required‼");
+            alert("NAME IS REQUIRED");
         }else{
             dispatch(get_pokemon_by_name(input))
             set_input("");

@@ -3,12 +3,10 @@ const { POKEMONS_URL } = require('../utils/constants');
 const {Pokemon, Type} = require('../db');
 
 async function get_api_data(){
-    const url_pokemons = await axios.get(`${POKEMONS_URL}?limit=40`);
-    let pokemons = [];
-    for(let pokemon of url_pokemons.data.results){
-        const pokemon_info = await axios.get(pokemon.url);
-        pokemons.push(pokemon_info.data);
-    }
+    let pokemons = await axios.get(POKEMONS_URL);
+    pokemons = pokemons.data.results.map(obj => axios.get(obj.url));
+    pokemons = await axios.all(pokemons);
+    pokemons = pokemons.map( obj => obj.data);
     return get_principal(pokemons);
 }
 

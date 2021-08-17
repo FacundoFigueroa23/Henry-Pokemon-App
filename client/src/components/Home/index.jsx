@@ -1,16 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {Link, useHistory} from 'react-router-dom';
-import styles from './home.module.css';
+import {useHistory} from 'react-router-dom';
 
-import {get_pokemons} from '../../actions';
 import Pagination from '../Pagination';
 import Pokemon from '../Pokemon';
 import SearchBar from '../SearchBar';
 import Filter from '../Filter';
 import Order from '../Order';
-
 import Song from './Pokémon Song.mp3';
+
+import {get_pokemons} from '../../actions';
+import styles from './home.module.css';
 
 function Home() {
     const dispatch = useDispatch();
@@ -54,14 +54,15 @@ function Home() {
             </div>
 
             <div className={styles.order_and_filter_box}>
-                <Order render={set_orden} />
+                <Order set_page={set_current_page} page={current_page} render={set_orden} />
                 <Filter />
             </div>
 
             <div className={styles.pokemons_box}>
                 {
                     pokemons.length !== 0 ? current_pokemons.map( poke => (
-                        <Pokemon id={poke.id} name={poke.name} image={poke.image} types={poke.types} />
+                        typeof poke === 'object' ? <Pokemon id={poke.id} name={poke.name} image={poke.image} types={poke.types} key={poke.id} />
+                        : <h3>{poke}</h3>
                     ))
                     : <div>Loading...</div>
                 }

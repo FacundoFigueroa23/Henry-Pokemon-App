@@ -31,14 +31,15 @@ function Detail(props) {
                     <img src={details.image} alt={`${details.name} image`} className={styles.imagen} />
                 </div>
                 <div className={styles.details}>
-                    <PokeDetail name="Name" data={upper_case(details.name)} />
-                    <PokeDetail name="Types" data={details.types.map( type => upper_case(type))} />
-                    <PokeDetail name="Height" data={details.height} />
-                    <PokeDetail name="Weight" data={details.weight} />
+                    <PokeDetail name="Id" data={details.id} />
+                    <PokeDetail name="Name" data={details.name ? upper_case(details.name) : details.name} />
+                    <PokeDetail name="Types" data={details.types ? details.types.map( type => upper_case(type)) : details.types} />
                     <PokeDetail name="Hp" data={details.hp} />
                     <PokeDetail name="Attack" data={details.attack} />
                     <PokeDetail name="Defense" data={details.defense} />
                     <PokeDetail name="Speed" data={details.speed} />
+                    <PokeDetail name="Height" data={details.height} />
+                    <PokeDetail name="Weight" data={details.weight} />
                 </div>
             </div>
         </div>

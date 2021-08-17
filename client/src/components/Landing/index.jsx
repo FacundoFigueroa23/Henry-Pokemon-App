@@ -1,16 +1,20 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import styles from './landing.module.css';
 
 function Landing() {
+    const history = useHistory();
+
+    function handle_home(e){
+        e.preventDefault();
+        history.push("/home");
+    }
     return (
         <div className={styles.landing_box}>
             <div className={styles.landing_title}>
-                <label>Welcome to Henry Pokemon!</label>
+                <label>¡Welcome to Henry Pokemon!</label>
             </div>
-            <Link to="/home" >
-                <button className={styles.landing_btn}>Enter</button>
-            </Link>
+            <button onClick={handle_home} className={styles.landing_btn}>ENTER</button>
         </div>
     )
 }

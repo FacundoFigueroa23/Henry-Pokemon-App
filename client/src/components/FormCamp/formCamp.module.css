@@ -1,0 +1,19 @@
+.formCamp_box{
+    padding: 10px;
+}
+
+.label{
+    font-family: 'Rubik', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.input_camp{
+    height: 22px;
+    padding-left: 5px;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Rubik', sans-serif;
+    font-size: 20px;
+}

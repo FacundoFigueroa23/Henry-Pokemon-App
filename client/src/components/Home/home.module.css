@@ -5,7 +5,7 @@
     flex-direction: column;
     align-items: center;
 
-    background-image: url("https://images.alphacoders.com/961/961754.png");
+    background-image: url("../../constants/home.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -41,7 +41,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: auto auto auto;
-
+    padding-bottom: 15px;
 }
 
 .btn{
@@ -60,6 +60,6 @@
 
 .audio{
     height: 30px;
-    padding: 5px;
+    padding: 15px;
     opacity: 0.6;
 }

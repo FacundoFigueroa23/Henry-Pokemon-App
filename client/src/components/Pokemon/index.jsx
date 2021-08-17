@@ -17,7 +17,7 @@ function Pokemon({id, name, image, types}) {
                 <label>{upper_case(name)}</label>
             </div>
             <div className={styles.types} >
-                <label>{types && typeof types[0] === 'string'? types.map( type => upper_case(type)) : types.map(obj => obj.name)}</label>
+                <label>{types && typeof types[0] === 'string'? types.map( type => upper_case(type)) : types.map(obj => upper_case(obj.name))}</label>
             </div>
             <button className={styles.details_btn} onClick={handle_click} >Details</button>
         </div>

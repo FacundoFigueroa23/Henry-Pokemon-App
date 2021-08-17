@@ -1,6 +1,6 @@
 .landing_box{
     height: 100%;
-    background: url("https://images.alphacoders.com/963/963324.png");
+    background: url("../../constants/landing.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -21,17 +21,17 @@
 }
 
 .landing_btn{
-    margin-left: 325px;
+    margin-left: 335px;
     margin-top: 10px;
-    width: 54px;
-    height: 53px;
+    width: 57px;
+    height: 54px;
 
     border: none;
     border-radius: 40px;
 
     color: red;
     font-family: 'Kanit', sans-serif;
-    font-size: 16px;
+    font-size: 15.5px;
 }
 
 .landing_btn:hover{

@@ -4,19 +4,27 @@ import {order_pokemons_by_name, order_pokemons_by_attack} from '../../actions';
 
 import styles from './order.module.css';
 
-function Order({render}) {
+function Order({set_page, page, render}) {
     const dispatch = useDispatch();
 
     function handle_order_name(e){
         e.preventDefault();
         dispatch(order_pokemons_by_name(e.target.value));
-        render(`Ordered by name ${e.target.value}`);
+        if(page === 1){
+            render(`Ordered by name ${e.target.value}`);
+        }else{
+            set_page(1);
+        }
     }
 
     function handle_order_attack(e){
         e.preventDefault();
         dispatch(order_pokemons_by_attack(e.target.value));
-        render(`Ordered by attack ${e.target.value}`);
+        if(page === 1){
+            render(`Ordered by attack ${e.target.value}`);
+        }else{
+            set_page(1);
+        }
     }
     return (
         <div className={styles.order_box}>
