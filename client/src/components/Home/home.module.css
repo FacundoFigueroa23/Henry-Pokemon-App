@@ -41,7 +41,8 @@
     width: 100%;
     display: grid;
     grid-template-columns: auto auto auto;
-    padding-bottom: 15px;
+    grid-template-rows: auto auto auto;
+    justify-content: space-around;
 }
 
 .btn{
@@ -59,6 +60,12 @@
 }
 
 .error{
+    grid-column-start: 2;
+    font-family: 'Rubik', sans-serif;
+}
+
+.loading{
+    grid-column-start: 2;
     font-family: 'Rubik', sans-serif;
 }
 

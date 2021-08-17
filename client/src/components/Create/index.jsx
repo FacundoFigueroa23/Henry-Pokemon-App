@@ -65,8 +65,10 @@ function Create() {
 
     function handle_submit(e){
         e.preventDefault(e);
-        if(input.name === ""){
-            alert("Name is required");
+        if(errors){
+            for (const error in errors) {
+                alert(errors[error]);
+            }
         }else{
             dispatch(post_pokemon(input));
             alert("¡Pokemon created!");
@@ -128,9 +130,6 @@ function validate(input){
     let errors = {};
     if(!input.name){
         errors.name = "Name is required";
-    }
-    if(input.types.length === 0){
-        errors.types = "Types are required";
     }
     if(input.hp < 0){
         errors.hp = "Hp can't be negative";

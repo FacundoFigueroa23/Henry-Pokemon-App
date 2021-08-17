@@ -63,7 +63,7 @@ function Home() {
                         typeof poke === 'object' ? <Pokemon id={poke.id} name={poke.name} image={poke.image} types={poke.types} key={poke.id} />
                         : <h3 className={styles.error} >{poke}</h3>
                     ))
-                    : <div>Loading...</div>
+                    : <h3 className={styles.loading} >Loading...</h3>
                 }
             </div>
 
