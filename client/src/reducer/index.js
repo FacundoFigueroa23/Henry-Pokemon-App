@@ -4,7 +4,6 @@ GET_DETAIL, RESET_DETAIL, POST_POKEMON, RELOAD_POKEMONS} from '../actions/names'
 const initial_state = {
     pokemons: [],
     all_pokemons: [],
-    original_pokemons: [],
     types: [],
     detail: {}
 };
@@ -49,13 +48,12 @@ function reducer(state = initial_state, action){
             return {
                 ...state,
                 pokemons: action.payload,
-                all_pokemons: action.payload,
-                original_pokemons: action.payload
+                all_pokemons: action.payload
             }
 
         case GET_POKEMON_BY_NAME:
             if(action.payload.length === 0) {
-                state.pokemons = ["El pokemon no se enccontró"]
+                state.pokemons = ["The pokemon doesn´t exist!"]
             }else{
                 state.pokemons = action.payload
             }
@@ -83,6 +81,8 @@ function reducer(state = initial_state, action){
                     if(a.attack < b.attack) return 1;
                     return 0;
                 });
+            }else{
+                pokemons_ordered_by_attack = state.all_pokemons
             }
             return {
                 ...state,
@@ -103,6 +103,8 @@ function reducer(state = initial_state, action){
                     if(a.name < b.name) return 1;
                     return 0;
                 });
+            }else{
+                pokemons_ordered_by_name = state.all_pokemons
             }
             return {
                 ...state,

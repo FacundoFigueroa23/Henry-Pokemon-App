@@ -15,6 +15,7 @@ import styles from './home.module.css';
 function Home() {
     const dispatch = useDispatch();
     const history = useHistory();
+    const [orden, set_orden] = useState('');
 
     useEffect( () => {
         dispatch(get_pokemons());
@@ -34,8 +35,6 @@ function Home() {
         e.preventDefault();
         dispatch(get_pokemons());
     }
-
-    const [orden, set_orden] = useState('');
 
     function create_pokemon_btn(e){
         e.preventDefault();
@@ -62,7 +61,7 @@ function Home() {
                 {
                     pokemons.length !== 0 ? current_pokemons.map( poke => (
                         typeof poke === 'object' ? <Pokemon id={poke.id} name={poke.name} image={poke.image} types={poke.types} key={poke.id} />
-                        : <h3>{poke}</h3>
+                        : <h3 className={styles.error} >{poke}</h3>
                     ))
                     : <div>Loading...</div>
                 }

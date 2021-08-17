@@ -33,7 +33,7 @@ function Detail(props) {
                 <div className={styles.details}>
                     <PokeDetail name="Id" data={details.id} />
                     <PokeDetail name="Name" data={details.name ? upper_case(details.name) : details.name} />
-                    <PokeDetail name="Types" data={details.types ? details.types.map( type => upper_case(type)) : details.types} />
+                    <PokeDetail name="Types" data={details.types ? details.types.map( type => (upper_case(type) + ' ')) : details.types} />
                     <PokeDetail name="Hp" data={details.hp} />
                     <PokeDetail name="Attack" data={details.attack} />
                     <PokeDetail name="Defense" data={details.defense} />

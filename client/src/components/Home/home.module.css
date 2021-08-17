@@ -58,6 +58,10 @@
     transition: 0.4s;
 }
 
+.error{
+    font-family: 'Rubik', sans-serif;
+}
+
 .audio{
     height: 30px;
     padding: 15px;

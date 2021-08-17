@@ -60,6 +60,9 @@ export function post_pokemon(payload){
         if(payload.image === ""){
             payload.image = DEFAULT_IMAGE.default;
         }
+        if(payload.types.length === 0){
+            payload.types.push("normal")
+        }
         const response = await axios.post("http://localhost:3001/pokemon", payload);
         return dispatch({type: POST_POKEMON, payload: response.data});
     }

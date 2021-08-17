@@ -3,3 +3,4 @@ export const LANDING = require("./landing.png");
 export const HOME = require("./home.png");
 export const DETAIL = require("./detail.png");
 export const CREATE = require("./create.png");
+export const ICON = require("./pokeball_icon.png");
