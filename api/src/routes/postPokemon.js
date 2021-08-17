@@ -7,6 +7,7 @@ router.post('/pokemon', async (req, res, next) => {
     try{
         const {name, image, hp, attack, defense, speed, height, weight, create, types} = req.body;
         if(!name || !types) return res.status(404).send("Faltan datos");
+        if(typeof name !== 'string' || typeof image !== 'string' || typeof hp !== 'number' || typeof attack !== 'number' || typeof defense !== 'number' || typeof speed !== 'number' || typeof height !== 'number' || typeof weight !== 'number') return res.status(404).send("Datos erroneos");
         const existe = await Pokemon.findAll({
             where: {
                 name
