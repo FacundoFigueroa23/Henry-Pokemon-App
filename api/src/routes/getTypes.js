@@ -9,7 +9,7 @@ const router = Router();
 router.get('/types', async (req, res, next) => {
     try{
         const existe = await Type.findAll({
-            attributes: ['id', 'name']
+            attributes: ['name']
         });
         if(existe.length === 0){
             let response = await axios.get(`${POKEMONS_TYPES}`);
@@ -19,7 +19,7 @@ router.get('/types', async (req, res, next) => {
             return res.status(200).send(get_types(response));
         }else{
             console.log("Se trajeron de la db los types");
-            return res.status(200).send(existe);
+            return res.status(200).send(get_types(existe));
         }
     }catch(error){
         next(error);

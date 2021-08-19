@@ -6,15 +6,22 @@ const router = Router();
 router.post('/pokemon', async (req, res, next) => {
     try{
         const {name, image, hp, attack, defense, speed, height, weight, create, types} = req.body;
-        if(!name || !types) return res.status(404).send("Faltan datos");
-        if(typeof name !== 'string' || typeof image !== 'string' || typeof hp !== 'number' || typeof attack !== 'number' || typeof defense !== 'number' || typeof speed !== 'number' || typeof height !== 'number' || typeof weight !== 'number') return res.status(404).send("Datos erroneos");
+        if(!name || !types){
+            console.log("Faltan datos: name o types");
+            return res.sendStatus(404);
+        }
+        if(typeof name !== 'string' || typeof image !== 'string' || typeof hp !== 'number' || typeof attack !== 'number' || typeof defense !== 'number' || typeof speed !== 'number' || typeof height !== 'number' || typeof weight !== 'number'){
+            console.log("Datos erroneos");
+            return res.sendStatus(404);
+        }
         const existe = await Pokemon.findAll({
             where: {
                 name
             }
         });
         if(existe.length !== 0){
-            return res.status(404).send("Ya existe un pokemon con ese nombre");
+            console.log("Ya existe un pokemon con ese nombre");
+            return res.sendStatus(404);
         }else{
             const pokemon_created = await Pokemon.create({
                 name: name.toLowerCase(),
@@ -33,7 +40,8 @@ router.post('/pokemon', async (req, res, next) => {
                 }
             });
             await pokemon_created.addType(all_types);
-            return res.status(200).send("El pokemon fue creado con éxito");
+            console.log("El pokemon fue creado con éxito");
+            return res.sendStatus(200);
         }
     }catch(error){
         next(error);

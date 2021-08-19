@@ -11,7 +11,7 @@ async function get_api_data(){
 }
 
 async function get_db_data(){
-    return await Pokemon.findAll({
+    let pokemons = await Pokemon.findAll({
         attributes: ['id', 'name', 'height', 'weight', 'hp', 'attack', 'defense', 'speed', 'image', 'create'],
         include: {
             model: Type,
@@ -21,6 +21,13 @@ async function get_db_data(){
             }
         }
     });
+    if(pokemons.length !== 0){
+        pokemons = pokemons.map(pok => pok.toJSON());
+        for(let i=0; i<pokemons.length; i++){
+            pokemons[i].types = pokemons[i].types.map(type => type.name);
+        }
+    }
+    return pokemons;
 }
 
 async function get_all_data(){
@@ -62,12 +69,8 @@ function get_detail(pok){
 }
 
 function get_types(array){
-    return array.map( type => {
-        return{
-            id: type.id,
-            name: type.name
-        }
-    })
+    let types = array.map( type => type.name);
+    return types;
 }
 
 module.exports = {
