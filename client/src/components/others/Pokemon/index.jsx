@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import {upper_case} from '../../controllers';
+import {upper_case} from '../../../controllers';
 import styles from './pokemon.module.css';
 
 function Pokemon({id, name, image, types}) {

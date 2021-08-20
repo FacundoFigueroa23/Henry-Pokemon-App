@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useHistory} from 'react-router-dom';
-import {get_types, post_pokemon} from '../../actions';
-import FormCamp from '../FormCamp';
-import {upper_case} from '../../controllers';
+import {get_types, post_pokemon} from '../../../redux/actions';
+import FormCamp from '../../others/FormCamp';
+import {upper_case} from '../../../controllers';
 
 import styles from './create.module.css';
 
@@ -49,10 +49,16 @@ function Create() {
 
     function handle_select(e){
         e.preventDefault();
-        set_input({
-            ...input,
-            types: [...input.types, e.target.value]
-        })
+        if(e.target.value !== ""){
+            let input_aux = input;
+            console.log("input_aux: ", input_aux);
+            input_aux.types.push(e.target.value)
+            set_input({
+                ...input,
+                types: input_aux.types
+            });
+        set_errors(validate(input_aux));
+        }
     }
 
     function handle_type_btn(e){
@@ -65,10 +71,12 @@ function Create() {
 
     function handle_submit(e){
         e.preventDefault(e);
-        if(errors){
+        if(Object.keys(errors).length !== 0){
             for (const error in errors) {
                 alert(errors[error]);
             }
+        }else if(input.name.length === 0 || input.types.length === 0){
+            alert("Missing required data: Name or Types")
         }else{
             dispatch(post_pokemon(input));
             alert("¡Pokemon created!");
@@ -96,16 +104,16 @@ function Create() {
                         <option></option>
                         {
                             types.map( type => (
-                                <option value={type.name} key={type.id} >{upper_case(type.name)}</option>
+                                <option value={type} key={type} >{upper_case(type)}</option>
                             ))
                         }
                     </select>
                 </div>
                 <div>
                     {
-                        errors.types && errors.types.length === 0 ? (
-                            <p>{errors.types}</p>
-                        ) : console.log()
+                        errors.types && (
+                            <p className={styles.error} >{errors.types}</p>
+                        )
                     }
                     {
                         input.types.map( type => (
@@ -148,6 +156,9 @@ function validate(input){
     }
     if(input.weight < 0){
         errors.weight = "Weight can't be negative";
+    }
+    if(input.types.length === 0){
+        errors.types = "Types are required";
     }
     return errors;
 }

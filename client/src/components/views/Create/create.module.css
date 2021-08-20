@@ -1,6 +1,6 @@
 .create_box{
     min-height: 100%;
-    background: url("../../constants/create.png");
+    background: url("../../../constants/create.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -45,6 +45,11 @@
     outline: none;
     font-family: 'Rubik', sans-serif;
     font-size: 18px;
+}
+
+.error{
+    font-family: 'Rubik', sans-serif;
+    font-weight: bold;
 }
 
 .type_btn{

@@ -1,6 +1,6 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
-import {order_pokemons_by_name, order_pokemons_by_attack} from '../../actions';
+import {order_pokemons_by_name, order_pokemons_by_attack} from '../../../redux/actions';
 
 import styles from './order.module.css';
 

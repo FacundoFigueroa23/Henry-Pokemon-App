@@ -1,15 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useHistory} from 'react-router-dom';
+import {get_pokemons} from '../../../redux/actions';
 
-import Pagination from '../Pagination';
-import Pokemon from '../Pokemon';
-import SearchBar from '../SearchBar';
-import Filter from '../Filter';
-import Order from '../Order';
+import Pagination from '../../others/Pagination';
+import Pokemon from '../../others/Pokemon';
+import SearchBar from '../../others/SearchBar';
+import Filter from '../../others/Filter';
+import Order from '../../others/Order';
 import Song from './Pokémon Song.mp3';
-
-import {get_pokemons} from '../../actions';
 import styles from './home.module.css';
 
 function Home() {

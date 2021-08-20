@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {get_types, filter_pokemons_by_type, filter_pokemons_by_origin} from '../../actions';
-import {upper_case} from '../../controllers';
+import {get_types, filter_pokemons_by_type, filter_pokemons_by_origin} from '../../../redux/actions';
+import {upper_case} from '../../../controllers';
 
 import styles from './filter.module.css';
 
@@ -31,7 +31,7 @@ function Filter() {
                 <option value="All">All</option>
                     {
                         types.map( type => (
-                            <option value={type.name} key={type.id} >{upper_case(type.name)}</option>
+                            <option value={type} key={type} >{upper_case(type)}</option>
                         ))
                     }
                 </select>

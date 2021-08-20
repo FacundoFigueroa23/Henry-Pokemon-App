@@ -16,6 +16,9 @@ function reducer(state = initial_state, action){
             let pokemons_filtered_by_origin;
             if(action.payload === "DB"){
                 pokemons_filtered_by_origin = state.all_pokemons.filter( poke => poke.hasOwnProperty("create"));
+                if(pokemons_filtered_by_origin.length === 0){
+                    pokemons_filtered_by_origin = ["There're no pokemons in the db"];
+                }
             }else if(action.payload === "API"){
                 pokemons_filtered_by_origin = state.all_pokemons.filter( poke => !poke.hasOwnProperty("create"));
             }else{
@@ -32,6 +35,9 @@ function reducer(state = initial_state, action){
                 pokemons_filtered_by_type = state.all_pokemons;
             }else{
                 pokemons_filtered_by_type = state.all_pokemons.filter( poke => poke.types.includes(action.payload));
+            }
+            if(pokemons_filtered_by_type.length === 0){
+                pokemons_filtered_by_type = ["There're no pokemons of that type"];
             }
             return {
                 ...state,
