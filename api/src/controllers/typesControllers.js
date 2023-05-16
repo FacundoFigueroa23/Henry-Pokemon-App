@@ -1,9 +1,12 @@
+// Defino los controladores para el tipo de pokemon.
+
 const axios = require('axios').default
 const { Type } = require('../db.js')
 const { POKEMONS_TYPES } = require('../utils/constants.js')
 const { getTypes } = require('../utils/index.js')
 
-// Traigo los tipos de pokemon primero desde la api y después de la db
+// Funcion para traer los tipos de pokemon primero desde la api.
+// Despues los creo en mi base de datos para luego traerlos de ahi.
 async function getTypesFromApi(req, res, next){
     try{
         const existe = await Type.findAll({
