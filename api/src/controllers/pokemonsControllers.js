@@ -1,23 +1,25 @@
+// Defino los controladores para el pokemon.
+
 const axios = require('axios').default
-const { POKEMON_NAME, POKEMON_ID } = require('../utils/constants.js')
-const { getAllData, getDbData, getDetail} = require('../utils/index.js')
+const { POKEMON } = require('../utils/constants.js')
+const { getAllData, getDatabaseData, getDetail} = require('../utils/index.js')
 const { Pokemon, Type } = require('../db.js')
 
-// Traigo todos los pokemons o el buscado por nombre
+// Funcion en la que traigo todos los pokemons o el buscado por nombre.
 async function getPokemons(req, res, next){
     const {name} = req.query
     try{
         if(!name){
             return res.status(200).send(await getAllData())
         }else{
-            const pokemonsDb = await getDbData()
+            const pokemonsDb = await getDatabaseData()
             const existeDb = pokemonsDb.find( pokemon => pokemon.name === name.toLowerCase())
             if(existeDb){
                 console.log("El pokemon se trajo de la db")
                 return res.status(200).send(existeDb)
             }
             try{
-                const existeApi = await axios.get(`${POKEMON_NAME}${name.toLowerCase()}`)
+                const existeApi = await axios.get(`${POKEMON}${name.toLowerCase()}`)
                 if(existeApi.data){
                     console.log("El pokemon se trajo de la api")
                     return res.status(200).send(getDetail(existeApi.data))
@@ -32,18 +34,18 @@ async function getPokemons(req, res, next){
     }
 }
 
-// Traigo el pokemon buscado por id
+// Funcion en la que traigo el pokemon buscado por id.
 async function getPokemonById(req, res, next){
     const {id} = req.params
     try{
-        let existeDb = await getDbData()
+        let existeDb = await getDatabaseData()
         existeDb = existeDb.find( pok => pok.id === id)
         if(existeDb){
             console.log("El pokemon se trajo de la db")
             return res.status(200).send(existeDb)
         }
         try{
-            const existeApi = await axios.get(`${POKEMON_ID}${id}`)
+            const existeApi = await axios.get(`${POKEMON}${id}`)
             if(existeApi.data){
                 console.log("El pokemon se trajo de la api")
                 return res.status(200).send(getDetail(existeApi.data))
@@ -57,7 +59,7 @@ async function getPokemonById(req, res, next){
     }
 }
 
-// Creo un pokemon
+// Funcion en la que creo un pokemon en la base de datos.
 async function postPokemon(req, res, next){
     const {name, image, hp, attack, defense, speed, height, weight, create, types} = req.body
     try{

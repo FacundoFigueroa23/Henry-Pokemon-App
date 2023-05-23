@@ -1,8 +1,10 @@
+// Defino funciones para manejar los datos de los pokemons.
+
 const axios = require('axios').default
 const { POKEMONS_URL } = require('./constants.js')
 const { Pokemon, Type } = require('../db.js')
 
-// Traigo los pokemons de la api
+// Funcion en la que traigo los pokemons de la api.
 async function getApiData(){
     let pokemons = await axios.get(POKEMONS_URL)
     pokemons = pokemons.data.results.map(obj => axios.get(obj.url))
@@ -11,8 +13,8 @@ async function getApiData(){
     return getPrincipal(pokemons)
 }
 
-// Traigo los pokemons de la db
-async function getDbData(){
+// Funcion en la que traigo los pokemons de la base de datos.
+async function getDatabaseData(){
     let pokemons = await Pokemon.findAll({
         attributes: ['id', 'name', 'height', 'weight', 'hp', 'attack', 'defense', 'speed', 'image', 'create'],
         include: {
@@ -32,14 +34,15 @@ async function getDbData(){
     return pokemons
 }
 
-// Concateno los pokemons de la api y los de la db
+// Funcion en la que traigo los pokemons de la api y los de la base de datos.
 async function getAllData(){
     const apiInfo = await getApiData()
-    const dbInfo = await getDbData()
+    const dbInfo = await getDatabaseData()
     return apiInfo.concat(dbInfo)
 }
 
-// Cambio los nombres de las propiedades de los pokemons que me vienen de la api por los nombres de las propiedades de mi modelo pokemon
+// Funcion en la que cambio los nombres de las propiedades de los pokemons que vienen
+// de la api por los nombres de las propiedades de mi modelo de pokemon.
 function getPrincipal(array){
     return array.map( pok => {
         return {
@@ -57,7 +60,8 @@ function getPrincipal(array){
     })
 }
 
-// Cambio los nombres de las propiedades del pokemon que me viene de la api por los nombres de las propiedades de mi modelo pokemon
+// Funcion en la que cambio los nombres de las propiedades del pokemon que viene
+// de la api por los nombres de las propiedades de mi modelo de pokemon.
 function getDetail(pok){
     return {
         id: pok.id,
@@ -73,14 +77,14 @@ function getDetail(pok){
     }
 }
 
-// Cambio la forma en la que me llegan los tipos de pokemon de la api
+// Funcion en la que cambio la forma en que envio los tipos de pokemon.
 function getTypes(array){
     return array.map( type => type.name)
 }
 
 module.exports = {
     getApiData,
-    getDbData,
+    getDatabaseData,
     getAllData,
     getPrincipal,
     getDetail,
